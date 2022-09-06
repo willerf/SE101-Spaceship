@@ -11,8 +11,12 @@ export default class YourSensorsController extends SensorsController {
 	propulsion?: YourPropulsionController
 
 	//Add additional attributes here
+	targetAngle = 0
 	
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
 		//Student code goes here
+		const passiveScanValues = passiveScan()
+		!(passiveScanValues instanceof(Error)) ? this.targetAngle = withinPiRange(passiveScanValues[0].heading):this.targetAngle=0;
+		
 	}
 }
